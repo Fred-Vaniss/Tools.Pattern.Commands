@@ -25,5 +25,21 @@ namespace DemoTestPatternCommand.Tests
             Assert.Single(personnes);
             Assert.Equal(1, personnes.First().Id);
         }
+
+        [Fact]
+        public void DeletePersonTest()
+        {
+            //Arrange
+            IPersonneRepository repository = new PersonneService();
+            Personne personne = new Personne() { Nom = "Doe", Prenom = "John" };
+            
+            //Act
+            repository.Insert(personne);
+            repository.Delete(1);
+            IEnumerable<Personne> personnes = repository.Get();
+            
+            //Assert
+            Assert.Empty(personnes);
+        }
     }
 }
